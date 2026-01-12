@@ -64,6 +64,13 @@ header li {
   font-size: 18px;
 }
 
+header a {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
 .cart
 {
   display: flex;

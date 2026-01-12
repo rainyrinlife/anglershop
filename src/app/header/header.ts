@@ -9,7 +9,9 @@ import { Component } from '@angular/core';
     <ul>
     <li><span class="logo"><a href="#"><img src="../assets/angler.png" alt="Logo">Anglerhead</a></span></li>  
     <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Workshops</a></li>
+      <li><a href="#">News & Events</a></li>
       <li><a href="#">Contact</a></li>
     
     <span class="cart">
