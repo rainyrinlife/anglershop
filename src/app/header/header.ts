@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     <header>
     <nav>
     <ul>
-    <li><span class="logo"><a href="#"><img src="../assets/angler.png" alt="Logo"></a></span></li>  
+    <li><span class="logo"><a href="#"><img src="../assets/angler.png" alt="Logo">Anglerhead</a></span></li>  
     <li><a href="#">Home</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#">Contact</a></li>
