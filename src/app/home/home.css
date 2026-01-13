@@ -1,0 +1,43 @@
+:host {
+  --content-padding: 10px;
+}
+
+.homecontainer {
+  padding: var(--content-padding);
+  display: flex;
+  flex-direction: column;
+} 
+
+.hero-content a{
+  text-decoration: none;
+}  
+
+
+.hero-content a:visited{
+  text-decoration: none;
+  color: grey;
+}  
+
+.hero {
+  height: 100vh;
+  background-color: #e0f7fa;
+  padding: var(--content-padding);
+  text-align: center;
+  font-size : 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about
+{
+  padding: 2rem;
+}
+
+.selection
+{
+  padding: 2rem;
+  background-color: #f1f8e9;
+}
+
