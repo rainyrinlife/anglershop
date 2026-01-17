@@ -1,0 +1,43 @@
+.container
+{   
+    display: flex;
+    flex-direction: row;
+    padding: 2rem;
+    gap: 1rem;
+    width: 100%;
+}
+
+.spacer
+{
+    flex: 1;
+}
+
+.workshops
+{
+    flex: 3;
+}
+
+.workshops-description
+{
+    margin-top: 1rem;
+}
+
+h2
+{
+    margin-bottom: 0.3rem;
+}
+
+.workshop-list {
+    margin-top: 2rem;
+    border: 1px solid #ccc;
+}
+
+.workshop-details {
+    font-style: italic;
+}
+
+.workshop-item {
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+}
