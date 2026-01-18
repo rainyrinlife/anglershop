@@ -27,6 +27,7 @@ h2
     margin-bottom: 0.3rem;
 }
 
+
 .workshop-list {
     margin-top: 2rem;
     border: 1px solid #ccc;
@@ -40,4 +41,14 @@ h2
     padding: 1rem;
     margin-top: 1rem;
     margin-left: 0.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.workshop-item:hover {
+    background-color: #f9f9f9;
+}
+
+.workshop-item:last-child
+{
+    border-bottom: none;
 }
