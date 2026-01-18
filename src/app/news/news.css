@@ -1,0 +1,35 @@
+.container
+{   
+    display: flex;
+    flex-direction: row;
+    padding: 2rem;
+    gap: 1rem;
+    width: 100%;
+}
+
+.spacer
+{
+    flex: 1;
+}
+
+.news
+{
+    flex: 3;}
+
+
+.update-date {
+    margin-bottom: 0.5rem;
+}
+
+
+
+.news-item {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    padding-right: 2rem;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
