@@ -19,11 +19,17 @@
     flex: 6;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
 }
 
 .product-category
 {
     margin-left: 0;
+}
+
+.product-category a p
+{
+    text-decoration: none;
 }
 
 .product-category-class
