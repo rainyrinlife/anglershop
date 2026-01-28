@@ -1,0 +1,14 @@
+.product-grid
+{
+    margin: 5rem 3rem 2rem 3rem;
+    padding: 0 2rem 2rem;
+    flex: 6;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.product-category
+{
+    margin-left: 0;
+}
