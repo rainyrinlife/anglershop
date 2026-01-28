@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -19,10 +19,10 @@ interface Product {
   styleUrls: [`products-page.css`],
 })
 export class ProductsPage implements OnInit {
+  
+  route: ActivatedRoute = inject(ActivatedRoute);
   products: Product[] = [];
   categoryTitle: string = '';
-
-  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
