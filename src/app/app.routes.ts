@@ -5,6 +5,7 @@ import { Workshops } from "./workshops/workshops";
 import { News } from "./news/news";
 import { Contact } from "./contact/contact";
 import { Cart } from "./cart/cart";
+import { ProductsPage } from "./products/products-page/products-page";
 
 export const routes: Routes = [ 
      { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,6 +13,7 @@ export const routes: Routes = [
   // 2. Standard routes
   { path: 'home', component: Home },
   { path: 'products', component: Products },
+  { path: 'products/:productCategory', component: ProductsPage },
   { path: 'workshops', component: Workshops },
   { path: 'news', component: News },
   { path: 'contact', component: Contact },
