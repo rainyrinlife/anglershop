@@ -1,0 +1,19 @@
+node_modules/
+dist/
+build/
+
+# Virtual Environment
+venv/
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+/media/
+
+# IDE
+.idea/
+.vscode/

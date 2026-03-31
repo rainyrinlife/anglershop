@@ -1,6 +1,6 @@
 # AnglerShop
 
-This project is the frontend for AnglerShop, an e-commerce web application for an online fishing supply store. It is built with Angular.
+This project is the frontend (and coming node.js backend) for AnglerShop, an e-commerce web application for an online fishing supply store. It is built with Angular.
 
 ## Key Features
 
