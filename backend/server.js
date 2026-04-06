@@ -1,4 +1,5 @@
 const db = require('./db/db.js');
+const itemRoutes = require('./api/items.js');
 
 const express = require('express');
 const cors = require('cors');
@@ -12,7 +13,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-const itemRoutes = require('./api/items.js');
 app.use('/api/items', itemRoutes);
 
 // Start server

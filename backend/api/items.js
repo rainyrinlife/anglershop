@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/db.js');
+const { validateCreate, validateUpdate } = require('../middleware/validateItem');
 
 // GET all items
 router.get('/', (req, res) => {
@@ -17,16 +18,15 @@ router.get('/:id', (req, res) => {
 });
 
 // POST create item
-router.post('/', (req, res) => {
+router.post('/', validateCreate, (req, res) => {
     const name = req.body.name;
-    if (!name) return res.status(400).send('Missing name');
     const info = db.prepare('INSERT INTO items (name) VALUES (?)').run(name);
     const newItem = db.prepare('SELECT * FROM items WHERE id = ?').get(info.lastInsertRowid);
     res.status(201).json(newItem);
 });
 
 // PUT update item
-router.put('/:id', (req, res) => {
+router.put('/:id', validateUpdate, (req, res) => {
     const id = parseInt(req.params.id, 10);
     const name = req.body.name;
     const info = db.prepare('UPDATE items SET name = ? WHERE id = ?').run(name, id);
