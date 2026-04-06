@@ -1,46 +1,45 @@
 const express = require('express');
 const router = express.Router();
-
-// Fake in-memory DB
-let items = [
-    { id: 1, name: 'Item One' },
-    { id: 2, name: 'Item Two' }
-];
+const db = require('../db/db.js');
 
 // GET all items
 router.get('/', (req, res) => {
-    res.json(items);
+    const rows = db.prepare('SELECT * FROM items').all();
+    res.json(rows);
 });
 
 // GET item by ID
 router.get('/:id', (req, res) => {
-    const item = items.find(i => i.id === parseInt(req.params.id));
-    if (!item) return res.status(404).send('Item not found');
-    res.json(item);
+    const id = parseInt(req.params.id, 10);
+    const row = db.prepare('SELECT * FROM items WHERE id = ?').get(id);
+    if (!row) return res.status(404).send('Item not found');
+    res.json(row);
 });
 
 // POST create item
 router.post('/', (req, res) => {
-    const newItem = {
-        id: items.length + 1,
-        name: req.body.name
-    };
-    items.push(newItem);
+    const name = req.body.name;
+    if (!name) return res.status(400).send('Missing name');
+    const info = db.prepare('INSERT INTO items (name) VALUES (?)').run(name);
+    const newItem = db.prepare('SELECT * FROM items WHERE id = ?').get(info.lastInsertRowid);
     res.status(201).json(newItem);
 });
 
 // PUT update item
 router.put('/:id', (req, res) => {
-    const item = items.find(i => i.id === parseInt(req.params.id));
-    if (!item) return res.status(404).send('Item not found');
-
-    item.name = req.body.name;
-    res.json(item);
+    const id = parseInt(req.params.id, 10);
+    const name = req.body.name;
+    const info = db.prepare('UPDATE items SET name = ? WHERE id = ?').run(name, id);
+    if (info.changes === 0) return res.status(404).send('Item not found');
+    const updated = db.prepare('SELECT * FROM items WHERE id = ?').get(id);
+    res.json(updated);
 });
 
 // DELETE item
 router.delete('/:id', (req, res) => {
-    items = items.filter(i => i.id !== parseInt(req.params.id));
+    const id = parseInt(req.params.id, 10);
+    const info = db.prepare('DELETE FROM items WHERE id = ?').run(id);
+    if (info.changes === 0) return res.status(404).send('Item not found');
     res.send('Item deleted');
 });
 
