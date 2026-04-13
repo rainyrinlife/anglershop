@@ -2,7 +2,9 @@ node_modules/
 dist/
 build/
 
-*.db
+
+
+backend/db/*.db
 
 # Virtual Environment
 venv/
