@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api/items', itemRoutes);
+app.use('/api/', itemRoutes);
 
 // Start server
 app.listen(PORT, () => {
