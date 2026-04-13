@@ -29,16 +29,17 @@ export class ProductsPage implements OnInit {
       const category = params.get('productCategory');
         //TODO: Fetch products based on category from a service
         //this.products currently is a placeholder
-        this.categoryTitle = "Fishing Rods";
-        this.products = [
-          {
-            id: '1',
-            name: 'Fishing Rod',
-            description: 'A high-quality fishing rod.',
-            price: 99.99,
-            imageUrl: 'assets/images/fishing-rod.jpg',
-            category: "Fishing Rods"
-          }];
+        
+
+        fetch(`http://localhost:3000/api/category/${category}`)
+          .then(response => response.json())
+          .then(data => {
+            this.products = data;
+            console.log('Fetched products:', this.products);
+          })
+          .catch(error => {
+            console.error('Error fetching products:', error);
+          });
       });
 }
 }
