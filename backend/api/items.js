@@ -4,6 +4,13 @@ const db = require('../db/db.js');
 const { validateCreate, validateUpdate } = require('../middleware/validateItem');
 
 
+router.get('/category-name/:handle', (req, res) => {
+    const handle = req.params.handle;
+    const row = db.prepare('SELECT * FROM categories WHERE handle = ?').get(handle);
+    if (!row) return res.status(404).send('Category not found');
+    res.json(row);
+});
+
 router.get('/category/:category', (req, res) => {
     const category = req.params.category;
     console.log('Fetching items for category:', category);
