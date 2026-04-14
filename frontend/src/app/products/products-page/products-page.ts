@@ -29,8 +29,17 @@ export class ProductsPage implements OnInit {
   async ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const category = params.get('productCategory');
-      this.categoryTitle = category || '';
+      this.categoryTitle = '';
       this.products = [];
+      this.service.getCategoryNameByHandle(category || null)
+        .then(categoryData => {
+          if (categoryData && categoryData.name) {
+            this.categoryTitle = categoryData.name;
+          }
+        })
+        .catch(err => {
+          console.error('Error fetching category name:', err);
+        });
       this.service.getItemsByCategory(category)
         .then(data => {
           this.products = data || [];
