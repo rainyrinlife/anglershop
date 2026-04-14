@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ProductsService } from '../products.service';
 
 interface Product {
   id: string;
@@ -23,23 +24,20 @@ export class ProductsPage implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   products: Product[] = [];
   categoryTitle: string = '';
+  service = inject(ProductsService);
 
-  ngOnInit() {
+  async ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const category = params.get('productCategory');
-        //TODO: Fetch products based on category from a service
-        //this.products currently is a placeholder
-        
-
-        fetch(`http://localhost:3000/api/category/${category}`)
-          .then(response => response.json())
-          .then(data => {
-            this.products = data;
-            console.log('Fetched products:', this.products);
-          })
-          .catch(error => {
-            console.error('Error fetching products:', error);
-          });
-      });
+      this.categoryTitle = category || '';
+      this.products = [];
+      this.service.getItemsByCategory(category)
+        .then(data => {
+          this.products = data || [];
+        })
+        .catch(err => {
+          console.error('Error fetching products:', err);
+        });
+    });
 }
 }
