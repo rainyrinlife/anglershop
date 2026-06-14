@@ -1,16 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductsService } from '../products.service';
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-  category: string;
-}
+import { Observable } from 'rxjs';
+import { Product } from '../product.model';
 
 @Component({
   selector: 'app-products-page',
@@ -25,28 +18,29 @@ export class ProductsPage implements OnInit {
   products: Product[] = [];
   categoryTitle: string = '';
   service = inject(ProductsService);
+  titlesignal = signal('');
 
-  async ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const category = params.get('productCategory');
-      this.categoryTitle = '';
-      this.products = [];
-      this.service.getCategoryNameByHandle(category || null)
-        .then(categoryData => {
-          if (categoryData && categoryData.name) {
-            this.categoryTitle = categoryData.name;
-          }
-        })
-        .catch(err => {
-          console.error('Error fetching category name:', err);
-        });
-      this.service.getItemsByCategory(category)
-        .then(data => {
-          this.products = data || [];
-        })
-        .catch(err => {
-          console.error('Error fetching products:', err);
-        });
+
+  
+ngOnInit() {
+
+      const categoryNameSubscription = this.service.getCategoryNameByHandle('fishing-rods')
+      
+      const categoryName = categoryNameSubscription.subscribe((res) => {this.categoryTitle = res?.name || 'Unknown Category'}) ;
+      console.log('Category title:', this.categoryTitle);
+
+
+const category = this.route.snapshot.paramMap.get('productCategory');
+    this.service.getItemsByCategory(category).subscribe({
+      next: (data) => {
+        this.products = data as Product[];
+        this.products = [...data];
+        console.log('Products:', this.products);
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      }
     });
+    console.log("over")
 }
 }
