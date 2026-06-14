@@ -4,19 +4,18 @@
     <h1>{{ categoryTitle }}</h1>
 </div>  
     <div class="product-grid">
-        @for (product of products; track product.name) {
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="{{ product.imageUrl }}" alt="{{ product.name }}">
-                </div>
-                <div class="product-details">
-                    <h3>{{ product.name }}</h3>
-                    <p>{{ product.description }}</p>
-                    <p>Price: {{ product.price }}</p>
-                    <p><button>Add to Cart</button></p>
-                </div>
+        <!-- TODO: How to iterate through an observable? do I need the obserable at all?-->
+        <div class="product-card" *ngFor="let product of products | async">
+            <div class="product-image">
+                <img [src]="product.imageUrl" [alt]="product.name">
             </div>
-        }
+            <div class="product-details">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p>Price: {{ product.price }}</p>
+                <p><button>Add to Cart</button></p>
+            </div>
+        </div>
     </div>
 <div class="spacer"></div>
 </div>
