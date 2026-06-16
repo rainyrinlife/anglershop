@@ -14,9 +14,9 @@ import { Product } from '../product.model';
 })
 export class ProductsPage implements OnInit {
   
-  route: ActivatedRoute = inject(ActivatedRoute);
-  products: Product[] = [];
-  categoryTitle: string = '';
+  route = inject(ActivatedRoute);
+  products = signal<Product[]>([] as Product[]);
+  categoryTitle = signal('');
   service = inject(ProductsService);
   titlesignal = signal('');
 
@@ -26,16 +26,15 @@ ngOnInit() {
 
       const categoryNameSubscription = this.service.getCategoryNameByHandle('fishing-rods')
       
-      const categoryName = categoryNameSubscription.subscribe((res) => {this.categoryTitle = res?.name || 'Unknown Category'}) ;
+      const categoryName = categoryNameSubscription.subscribe((res) => {this.categoryTitle.update(() => res?.name || 'Unknown Category')}) ;
       console.log('Category title:', this.categoryTitle);
 
 
 const category = this.route.snapshot.paramMap.get('productCategory');
     this.service.getItemsByCategory(category).subscribe({
       next: (data) => {
-        this.products = data as Product[];
-        this.products = [...data];
-        console.log('Products:', this.products);
+        this.products.update(() => data as Product[]);
+        console.log('Products:', this.products());
       },
       error: (err) => {
         console.error('Error fetching products:', err);

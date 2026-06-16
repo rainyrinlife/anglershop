@@ -1,11 +1,11 @@
 <div class="container">
 <div class="spacer"></div>
 <div class="product-category-introduction">
-    <h1>{{ categoryTitle }}</h1>
+    <h1>{{ categoryTitle() }}</h1>
 </div>  
     <div class="product-grid">
         <!-- TODO: How to iterate through an observable? do I need the obserable at all?-->
-        <div class="product-card" *ngFor="let product of products | async">
+        <div class="product-card" *ngFor="let product of products()">
             <div class="product-image">
                 <img [src]="product.imageUrl" [alt]="product.name">
             </div>
