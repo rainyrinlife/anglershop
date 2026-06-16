@@ -12,3 +12,10 @@
 {
     margin-left: 0;
 }
+
+.product-image img
+{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
