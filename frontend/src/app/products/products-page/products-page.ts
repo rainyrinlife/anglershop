@@ -2,7 +2,6 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductsService } from '../products.service';
-import { Observable } from 'rxjs';
 import { Product } from '../product.model';
 
 @Component({
@@ -14,12 +13,33 @@ import { Product } from '../product.model';
 })
 export class ProductsPage implements OnInit {
   
+
+  //Cart <ProductUUID, Quantity>
+  cart = signal<Map<string, number>>(new Map());
   route = inject(ActivatedRoute);
   products = signal<Product[]>([] as Product[]);
   categoryTitle = signal('');
   service = inject(ProductsService);
   titlesignal = signal('');
 
+addToCart(product: Product) {
+  let productUUID = product.id;
+  const currentCart = this.cart();
+  // Check if the product is already in the cart
+  // and if not increase quantity by 1
+
+
+  if (currentCart.has(productUUID)) {
+    if (product.stock || 0 > 0)
+    {
+      currentCart.set(productUUID, currentCart.get(productUUID) || 0 + 1);  
+    }
+  }
+  else
+  {
+    currentCart.set(productUUID, 0);
+  }
+}
 
   
 ngOnInit() {
