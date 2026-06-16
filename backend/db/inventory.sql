@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS categories (
           }];
 */
 INSERT OR IGNORE INTO items (id, category, name, description, price, imageUrl, stock) VALUES
-(NULL, 'fishing-rods', 'Fishing Rod', 'A high-quality fishing rod for all your angling needs.', 49.99, 'assets/images/fishing-rod.jpg', 10),
+(NULL, 'fishing-rods', 'Fox Horizon_X3_S', 'A high-quality fishing rod for all your angling needs.', 49.99, 'assets/images/Fox Horizon_X3_S.webp', 15),
 (NULL, 'fishing-reels', 'Fishing Reel', 'A durable fishing reel that provides smooth performance.', 29.99, 'assets/images/fishing-reel.jpg', 15),
 (NULL, 'fishing-lines', 'Fishing Line', 'Strong and reliable fishing line for various fishing conditions.', 9.99, 'assets/images/fishing-line.jpg', 50),
 (NULL, 'fishing-lures', 'Fishing Lure', 'A variety of fishing lures to attract different types of fish.', 14.99, 'assets/images/fishing-lure.jpg', 30),

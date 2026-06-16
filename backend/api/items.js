@@ -32,6 +32,14 @@ router.get('/items/:id', (req, res) => {
     res.json(row);
 });
 
+//Get asset by name 
+router.get('/assets/:name', (req, res) => {
+    const name = req.params.name;
+    const row = db.prepare('SELECT * FROM items WHERE name = ?').get(name);
+    if (!row) return res.status(404).send('Item not found');
+    res.json(row);
+});
+
 // POST create item
 router.post('/items', validateCreate, (req, res) => {
     const name = req.body.name;
