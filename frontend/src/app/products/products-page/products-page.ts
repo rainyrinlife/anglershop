@@ -15,7 +15,7 @@ export class ProductsPage implements OnInit {
   
 
   //Cart <ProductUUID, Quantity>
-  cart = signal<Map<string, number>>(new Map());
+  cart = signal<Map<number, number>>(new Map());
   route = inject(ActivatedRoute);
   products = signal<Product[]>([] as Product[]);
   categoryTitle = signal('');
@@ -25,20 +25,17 @@ export class ProductsPage implements OnInit {
 addToCart(product: Product) {
   let productUUID = product.id;
   const currentCart = this.cart();
-  // Check if the product is already in the cart
-  // and if not increase quantity by 1
-
-
-  if (currentCart.has(productUUID)) {
-    if (product.stock || 0 > 0)
+  
+    //Check if theres stock of the product left
+    if (product.stock > 0)
     {
-      currentCart.set(productUUID, currentCart.get(productUUID) || 0 + 1);  
+      // Check if the product is already in the cart
+      // and if not increase quantity by 1
+      let currentAmount = currentCart.get(productUUID);
+      if (currentAmount == undefined) {currentAmount = 0;}
+      currentCart.set(productUUID, currentAmount + 1);  
     }
-  }
-  else
-  {
-    currentCart.set(productUUID, 0);
-  }
+ 
 }
 
   
